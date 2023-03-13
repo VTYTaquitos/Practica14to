@@ -17,7 +17,7 @@ def depositar():
         seccionD3.pack(expand=True,fill='both')
         
         ##Textos ventana depositar
-        txtDe= Label(seccionD1,text="Bienvenido a FB",bg= "black", fg="orange")
+        txtDe= Label(seccionD1,text="Deposito de cuenta",bg= "black", fg="orange")
         txtDe.configure(font=("arial", 14))
         txtDe.place(width="650", height="80")
         txtNoc= Label(seccionD2,text="Numero de cuenta: ",bg= "black", fg="orange")
@@ -34,10 +34,10 @@ def depositar():
         CanDep.place(x=200, y=80)
 
         def depo():
-             depositar = banco()   
+                
              NoCuDep = NoDep.get()
              CanDeDep = int(CanDep.get())
-             depositar.Depo(NoCuDep,CanDeDep)    
+             consultaS.Depo(NoCuDep,CanDeDep)    
         
         ##Botones ventana depositar
         botonDepo = Button(seccionD3,text="Confirmar", fg= "black", bg="orange", command= depo )
@@ -81,11 +81,11 @@ def retirar():
         CanRe.place(x=200, y=110)
         
         def ret():
-             retiroDinero = banco()   
+          
              NoCuDep = NoRe.get()
              Gnip = Retnip.get()
              CanDeRet = CanRe.get()
-             retiroDinero.Ret(NoCuDep,Gnip,CanDeRet)
+             consultaS.Ret(NoCuDep,Gnip,CanDeRet)
              
         
         ##Botones ventana Retirar
@@ -125,7 +125,7 @@ def Saldo():
         Connip.place(x=200, y=80)
 
         def Consultar():
-            consultaS = banco()    
+             
             NoCuDep = NoCu.get()  
             Gnip  = Connip.get()
             consultaS.Consu(NoCuDep,Gnip)
@@ -137,6 +137,7 @@ def Saldo():
         botonDepo.place(x=180, y=40)        
         
 ventana= Tk()  
+consultaS = banco()  
 ventana.geometry("600x400")
 ventana.title("Banco del Frank")
 

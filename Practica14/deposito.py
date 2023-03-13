@@ -21,7 +21,8 @@ class banco():
     def Ret(self, nocuenta, nip, retiro):
         if(self.NoCuDep == nocuenta and self.Gnip == nip):
             messagebox.showerror("Retiro exitoso", "Favor de tomar tu efectivo: " +str(retiro))
-            self.saldoT -= retiro
+            self.saldoT = self.saldoT - int(retiro)
+            print(int(self.saldoT))
         else:
             messagebox.showerror("Retiro fallido", "Consulta tu saldo o revisa que los datos esten bien")
     
@@ -29,5 +30,7 @@ class banco():
         if(self.NoCuDep ==  nocuenta and self.Gnip == nip):
             #saldoActual = self.saldoT
             messagebox.showerror("Consulta de saldo","Tu saldo actual es: " + str(self.saldoT))
+            print(str(self.saldoT))
         else:
             messagebox.showerror("Consulta de saldo", "Datos incorrectos")
+            
