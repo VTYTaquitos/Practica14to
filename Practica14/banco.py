@@ -34,13 +34,13 @@ def depositar():
         CanDep.place(x=200, y=80)
 
         def depo():
+             depositar = banco()   
              NoCuDep = NoDep.get()
-             CanDeDep = CanDep.get()
-             ##print(NoCuDep, CanDeDep )
-             
+             CanDeDep = int(CanDep.get())
+             depositar.Depo(NoCuDep,CanDeDep)    
         
         ##Botones ventana depositar
-        botonDepo = Button(seccionD3,text="Depositar", fg= "black", bg="orange", command= depo)
+        botonDepo = Button(seccionD3,text="Confirmar", fg= "black", bg="orange", command= depo )
         botonDepo.place(x=90, y=40)
         botonDepo = Button(seccionD3,text="regresar", fg= "black", bg="orange", command= ventana_deposito.destroy)
         botonDepo.place(x=180, y=40)
@@ -81,9 +81,11 @@ def retirar():
         CanRe.place(x=200, y=110)
         
         def ret():
+             retiroDinero = banco()   
              NoCuDep = NoRe.get()
              Gnip = Retnip.get()
              CanDeRet = CanRe.get()
+             retiroDinero.Ret(NoCuDep,Gnip,CanDeRet)
              
         
         ##Botones ventana Retirar
@@ -117,14 +119,19 @@ def Saldo():
         txtSNIP.place(x=90,y=80)
         
         ##cuadros ventana Retirar
-        NoRe= Entry(seccionS2, bg="#F3F3F3")
-        NoRe.place(x=220, y=43)
+        NoCu= Entry(seccionS2, bg="#F3F3F3")
+        NoCu.place(x=220, y=43)
         Connip= Entry(seccionS2, bg="#F3F3F3")
         Connip.place(x=200, y=80)
 
+        def Consultar():
+            consultaS = banco()    
+            NoCuDep = NoCu.get()  
+            Gnip  = Connip.get()
+            consultaS.Consu(NoCuDep,Gnip)
         
         ##Botones ventana Retirar
-        botonDepo = Button(seccionS3,text="Consultar", fg= "black", bg="orange")
+        botonDepo = Button(seccionS3,text="Consultar", fg= "black", bg="orange", command= Consultar)
         botonDepo.place(x=90, y=40)
         botonDepo = Button(seccionS3,text="Regresar", fg= "black", bg="orange", command= ventana_saldo.destroy)
         botonDepo.place(x=180, y=40)        
