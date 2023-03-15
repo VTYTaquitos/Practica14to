@@ -4,21 +4,20 @@ from tkinter import *
 
 class matricula():
     def __init__(self):
-        self.Nombre_E = ""
+        self.NombreE = ""
         self.ApePapa = ""
         self.ApeMama = ""
         self.AñoNas = ""
-        self.Carrera_E = ""
+        self.CarreraE = ""
     
     def Crear(self, nombre, paterno, materno, nacimiento, carrera):
         
-        nombre =  self.Nombre_E
+        nombre =  self.NombreE
         paterno = self.ApePapa
         materno = self.ApeMama
         nacimiento = self.AñoNas
-        carrera =  self.Carrera_E
-        datos = nombre + paterno + materno + nacimiento + carrera
-        curso = 2023
+        carrera =  self.CarreraE
+        curso =str(2023)
+        orden = carrera + curso + nacimiento + nombre + paterno + materno
         
-        muestra = random.sample(datos,curso)
-        messagebox.showerror("Matricula","La matricula es: " + muestra)  
+        messagebox.showinfo("Matricula","La matricula es: "+ orden)

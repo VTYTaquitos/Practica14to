@@ -4,15 +4,15 @@ from tkinter import messagebox, ttk
 from matricula import *
 
 def generar():
-    Nombre_E =  NomEn.get()
+    NombreE =  NomEn.get()
     ApePapa = ApePa.get()
     ApeMama = ApeMa.get()
     AñoNas = Nas.get()
-    Carrera_E = Car.get()
-   #print(Nombre_E, ApePapa, ApeMama, AñoNas, Carrera_E)
-    Fmat.Crear(Nombre_E, ApePapa, ApeMama, AñoNas, Carrera_E)
+    CarreraE = Car.get()
+    print(NombreE, ApePapa, ApeMama, AñoNas, CarreraE)
+    GeneracionMatricula.Crear(NombreE, ApePapa, ApeMama, AñoNas, CarreraE)
 
-Fmat = matricula()   
+GeneracionMatricula = matricula()    
 
 ventana= Tk()  
 ventana.geometry("600x400")
