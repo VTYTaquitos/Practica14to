@@ -17,6 +17,7 @@ def busquedaUsuario():
     for usu in rsUsuario:
         cadena = str(usu[0])+" "+ usu[1] +" "+usu[2] +" "+ str(usu[3])
     if(rsUsuario):
+        texBus.insert('0.0', cadena)
         print(cadena)        
     else:
         messagebox.showinfo("Usuario no encontrado")
@@ -55,7 +56,9 @@ lblid=Label(pestana2,text="Identificador de usuario: ").pack()
 txtid = Entry(pestana2,textvariable= VarBus).pack()
 btnBusqueda = Button(pestana2, text="Buscar",command=busquedaUsuario).pack()
 subBus = Label(pestana2,text="Encontrado",fg="blue",font= ("Modern",14)).pack()
-texBus= tk.Text(pestana2,height=5,width=52).pack()
+texBus= tk.Text(pestana2,height=5,width=52)
+texBus.pack()
+
 
 #Texto de las pestañas con su add
 panel.add(pestana1,text="Formulario de usuarios")
