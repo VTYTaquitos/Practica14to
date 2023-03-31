@@ -22,6 +22,13 @@ def busquedaUsuario():
     else:
         messagebox.showinfo("Usuario no encontrado")
         
+def MostrarUsuarios():   
+    usuarios = controlador.mostrarUsuarios()
+    for i in tablaM.get_children():
+        tablaM.delete(i)
+    for usua in usuarios:
+        tablaM.insert("",END,values= (usua[0],usua[1],usua[2]))
+        
 venatana = Tk()
 venatana.title("CRUD Usuarios")
 venatana.geometry("500x400")
@@ -59,6 +66,21 @@ subBus = Label(pestana2,text="Encontrado",fg="blue",font= ("Modern",14)).pack()
 texBus= tk.Text(pestana2,height=5,width=52)
 texBus.pack()
 
+#Pestaña 3 
+titulo = Label(pestana3,text="Mostrar usuarios",fg="blue",font= ("Modern",18)).pack()
+#columnas = ('Id','Nombre','Corr','Contra') 
+columnas = ('Id','Nombre','Corr') 
+btnMostrar = Button(pestana3, text="Mostrar",command=MostrarUsuarios).pack()
+tablaM = ttk.Treeview(pestana3,columns= columnas,show="headings")
+tablaM.column("Id", width=100)
+tablaM.column("Nombre", width=100)
+tablaM.column("Corr", width=100)
+#tablaM.column("Contra", width=100)
+tablaM.heading("Id",text="ID")
+tablaM.heading("Nombre",text="NOMBRE")
+tablaM.heading("Corr",text="CORREO")
+#tablaM.heading("Contra",text="CONTRASEÑA")
+tablaM.pack()
 
 #Texto de las pestañas con su add
 panel.add(pestana1,text="Formulario de usuarios")
