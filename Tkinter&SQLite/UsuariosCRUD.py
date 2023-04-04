@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk
 from tkinter import messagebox
-from controladorBD import * #Importamos la clase a la ventana
+from controladorBD import * 
 
 #Creamos un objeto de tipo controlador 
 controlador = controladorBD()
@@ -28,6 +28,12 @@ def MostrarUsuarios():
         tablaM.delete(i)
     for usua in usuarios:
         tablaM.insert("",END,values= (usua[0],usua[1],usua[2]))
+        
+def ModificarUsuarios():        
+    controlador.edicionUsuario(VarIDC.get(),VarNomC.get(),VarCorreoC.get(),VarContraC.get())
+    
+def eliminarUsuario():
+    controlador.eliminarUsuarioBD(VarIDE.get())
         
 venatana = Tk()
 venatana.title("CRUD Usuarios")
@@ -70,7 +76,6 @@ texBus.pack()
 titulo = Label(pestana3,text="Mostrar usuarios",fg="blue",font= ("Modern",18)).pack()
 #columnas = ('Id','Nombre','Corr','Contra') 
 columnas = ('Id','Nombre','Corr') 
-btnMostrar = Button(pestana3, text="Mostrar",command=MostrarUsuarios).pack()
 tablaM = ttk.Treeview(pestana3,columns= columnas,show="headings")
 tablaM.column("Id", width=100)
 tablaM.column("Nombre", width=100)
@@ -81,6 +86,28 @@ tablaM.heading("Nombre",text="NOMBRE")
 tablaM.heading("Corr",text="CORREO")
 #tablaM.heading("Contra",text="CONTRASEÑA")
 tablaM.pack()
+btnMostrar = Button(pestana3, text="Mostrar",command=MostrarUsuarios).pack()
+VarIDE=tk.StringVar()
+lblIDE=Label(pestana3,text="Id:").pack()
+txtIDE = Entry(pestana3,textvariable= VarIDE).pack()
+btnEliminar = Button(pestana3, text="Eliminar",command=eliminarUsuario).pack()
+
+#Pestaña 4
+titulo = Label(pestana4,text="Modificar usuario",fg="blue",font= ("Modern",18)).pack()
+VarIDC=tk.StringVar()
+lblIDC=Label(pestana4,text="Id:").pack()
+txtIDC = Entry(pestana4,textvariable= VarIDC).pack()
+VarNomC=tk.StringVar()
+lblNomC=Label(pestana4,text="Nombre:").pack()
+txtNomC = Entry(pestana4,textvariable= VarNomC).pack()
+VarCorreoC=tk.StringVar()
+lblCorreoC=Label(pestana4,text="Correo:").pack()
+txtCorreoC = Entry(pestana4,textvariable= VarCorreoC).pack()
+VarContraC=tk.StringVar()
+lblContraC=Label(pestana4,text="Contraseña:").pack()
+txtContraC = Entry(pestana4,textvariable= VarContraC).pack()
+btnMostrar = Button(pestana4, text="Actualizar",command=ModificarUsuarios).pack()
+
 
 #Texto de las pestañas con su add
 panel.add(pestana1,text="Formulario de usuarios")

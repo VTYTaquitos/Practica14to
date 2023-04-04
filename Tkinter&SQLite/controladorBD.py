@@ -11,7 +11,6 @@ class controladorBD:
         #Preparamos la coneccion para usar la BD 
         try: 
             conexion = sqlite3.connect("C:/Users/frank/OneDrive/Documents/GitHub/Practica14to/Tkinter&SQLite/BaseTkinter.db")
-            print("Conectado a BD")
             return conexion
         
         except sqlite3.OperationalError:
@@ -46,7 +45,6 @@ class controladorBD:
         conPlana = conPlana.encode() #Cambia la contraseña a bytes
         sal = bcrypt.gensalt()
         conHa = bcrypt.hashpw(conPlana,sal)
-        print(conHa)
         return conHa
     
     def consultaUsuario(self,id):
@@ -76,5 +74,39 @@ class controladorBD:
              MResu=cursor.fetchall()
              conx.close()
              return MResu
+        except sqlite3.OperationalError:
+                print("Error de consulta")
+
+    def edicionUsuario(self,idE,nomE,corE,conE):
+        conx = self.conexionBD()
+        if (idE == "" or nomE == "" or corE =="" or conE==""):
+            messagebox.showwarning("Cuidado","Revisa lo que pusiste")
+            conx.close()
+        else:
+            cursor = conx.cursor()
+            conH = self.encriptarCon(conE)
+            #datos = (nomE,corE,conH)
+            datos = (nomE,corE,conH,idE)
+            qrActualizar = ("UPDATE TBResgistrados SET Nombre = ?, Correo = ?, Contra = ? WHERE Id = ?")
+            cursor.execute(qrActualizar,datos)
+            conx.commit()
+            conx.close()
+            messagebox.showinfo("Bien","Se ah modificado correctamente el usuario")
+    
+    def eliminarUsuarioBD(self,idEE):
+        conx = self.conexionBD()  
+        try:
+            cursor = conx.cursor()
+            qrEliminar = ("DELETE FROM TBResgistrados WHERE Id = ?")
+            datos = (idEE)
+            confi = messagebox.askokcancel("Confirmacion","Esta seguro de querer eliminar esta info")
+            if confi == True:
+                cursor.execute(qrEliminar,datos)
+                conx.commit()
+                conx.close()
+                messagebox.showinfo("Elimino","Se a eliminado el perfil")
+            else:
+                conx.close()
+                messagebox.showinfo("Error","No se pudo completar la accion")
         except sqlite3.OperationalError:
                 print("Error de consulta")
