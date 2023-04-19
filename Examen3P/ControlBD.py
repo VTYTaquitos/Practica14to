@@ -9,37 +9,35 @@ class controladorBD:
     def conexionBD(self):
         try: 
             conexion = sqlite3.connect("C:/Users/frank/OneDrive/Documents/GitHub/Practica14to/Examen3P/BD_Banco.db")
-        
+            return conexion
         except sqlite3.OperationalError:
             print("No se pudo conectar")
             
-    def InsertarBD(self,nom,cue,con):
+    def InsertarBD(self,cue,sal):
         conx = self.conexionBD()
     
-        if (nom == "" or cue =="" or con==""):
+        if (cue =="" or sal==""):
             messagebox.showwarning("Cuidado","Revisa lo que pusiste")
             conx.close()
         else:
             cursor = conx.cursor()
-            datos = (nom,cue,con)
-            qrInster = "insert into TBCunetas (Nombre,NoCuenta,Contra) values (?,?,?)" 
+            datos = (cue,sal)
+            qrInster = "insert into TBCuentas (NoCuenta,Saldo) values (?,?)" 
             cursor.execute(qrInster,datos)
             conx.commit()
             conx.close()
             messagebox.showinfo("Bien","Se ah insertado correctamente el usuario")
     
     
-    def CambiarInfo(self,idE,nomE,cueE,conE):
+    def CambiarInfo(self,idE,cueE,salE):
         conx = self.conexionBD()
-        if (idE == "" or nomE == "" or cueE =="" or conE==""):
+        if (idE == "" or cueE =="" or salE==""):
             messagebox.showwarning("Cuidado","Revisa lo que pusiste")
             conx.close()
         else:
             cursor = conx.cursor()
-            conH = self.encriptarCon(conE)
-            #datos = (nomE,corE,conH)
-            datos = (nomE,cueE,conH,idE)
-            qrActualizar = ("UPDATE TBCunetas SET Nombre = ?, NoCuenta = ?, Contra = ? WHERE Id = ?")
+            datos = (cueE,salE,idE)
+            qrActualizar = ("UPDATE TBCuentas SET NoCuenta = ?, Saldo = ? WHERE Id_Cuneta = ?")
             cursor.execute(qrActualizar,datos)
             conx.commit()
             conx.close()
@@ -49,7 +47,7 @@ class controladorBD:
         conx = self.conexionBD()
         try:
              cursor=conx.cursor()
-             sqlMostrar = "select * from TBCunetas"
+             sqlMostrar = "select * from TBCuentas"
              cursor.execute(sqlMostrar)
              MResu=cursor.fetchall()
              conx.close()
